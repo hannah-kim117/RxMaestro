@@ -12,6 +12,7 @@ CREATE OR REPLACE TABLE Manufacturers (
     manufacturerID int NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     phoneNumber varchar(255),
+    CONSTRAINT UNIQUE (name),
     PRIMARY KEY (manufacturerID)
 );
 
@@ -31,11 +32,13 @@ CREATE OR REPLACE TABLE Drugs (
 CREATE OR REPLACE TABLE DrugInteractionSources (
     sourceName varchar(255) NOT NULL,
     url varchar(255) NOT NULL,
+    CONSTRAINT UNIQUE (sourceName),
     PRIMARY KEY (sourceName)
 );
 
 -- Create Interactions Table
-CREATE OR REPLACE TABLE Interactions (
+CREATE OR REPLACE TABLE DrugInteractions (
+    interactionID int(11) NOT NULL AUTO_INCREMENT,
     drugID1 int(11) NOT NULL,
     drugID2 int(11) NOT NULL,
     source varchar(255) NULL,
@@ -49,7 +52,7 @@ CREATE OR REPLACE TABLE Interactions (
     ON DELETE CASCADE,
     FOREIGN KEY (source) REFERENCES DrugInteractionSources(sourceName)
     ON DELETE SET NULL,
-    PRIMARY KEY (drugID1, drugID2)
+    PRIMARY KEY (interactionID)
 );
 
 -- Create Patients Table
@@ -57,6 +60,7 @@ CREATE OR REPLACE TABLE Patients (
     patientID int NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     phoneNumber varchar(255) NOT NULL,
+    CONSTRAINT UNIQUE (name),
     PRIMARY KEY (patientID)
 );
 
@@ -72,11 +76,7 @@ CREATE OR REPLACE TABLE PatientPrescriptions (
     FOREIGN KEY (drugID) REFERENCES Drugs(drugID)
     ON DELETE CASCADE,
     PRIMARY KEY (patientPrescriptionID)
-    
 );
-
-
-
 
 -- insert data into Manufacturers table
 INSERT INTO Manufacturers (
@@ -184,7 +184,7 @@ VALUES
 );
 
 -- Insert data into Interactions
-INSERT INTO Interactions (
+INSERT INTO DrugInteractions (
     drugID1,
     drugID2,
     sideEffectDescription,
@@ -213,11 +213,6 @@ VALUES
     "Moderate",
     (SELECT sourceName from DrugInteractionSources where DrugInteractionSources.sourceName = "DrugBank")
 );
-
-
-
-
-
 
 -- enable foreign key checks and commit
 SET FOREIGN_KEY_CHECKS=1;

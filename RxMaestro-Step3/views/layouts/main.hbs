@@ -1,0 +1,44 @@
+{{!-- 
+Citation for this file:
+Date: 11/13/2023
+Based on Node.js starter code for this course
+The navigation system and layout are original for our project
+Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<!-- main.hbs--> <!-- foundation for the template builder -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rx Maestro</title>
+
+    {{!-- <link href="style.css" rel="stylesheet" type="text/css" /> --}}
+</head>
+<body>
+    <h1>Rx Maestro</h1>
+    [ 
+    <a href="/">Home</a>
+    |
+    <a href="/patients">Patients</a>
+    | 
+    <a href="/patient-prescriptions">Patient Prescriptions</a>
+    |
+    <a href="/drug-interactions">Drug Interactions</a>
+    |
+    <a href="/drugs">Drugs</a>
+    |
+    <a href="/manufacturers">Manufacturers</a>
+    |
+    <a href="/drug-interaction-sources">Drug Interaction Sources</a>
+    ]
+
+    {{{body}}}
+
+</body>
+
+<footer>
+    <p>&copy; 2023 Hannah Kim, Alexander Freddo</p>
+
+</footer>
+</html>

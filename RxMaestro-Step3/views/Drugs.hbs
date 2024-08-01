@@ -1,0 +1,60 @@
+{{!-- 
+Citation for this file:
+Date: 11/13/2023
+Based on Node.js starter code for this course
+The individual elements and tables have been customized and modified for our project.
+Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<!-- Drugs.hbs -->
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<h1>Drugs</h1>
+
+{{!-- Create a table --}}
+<table border="1" cellpadding="5" id="drug-table">
+
+    <thead>
+        <tr>
+            {{#each data.[0]}}              
+            <th>
+                {{@key}}        <!-- key name for the current iteration step -->
+            </th>
+            {{/each}}
+            
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.RXCUI}}</td>
+            <td>{{this.drugName}}</td>
+            <td>{{this.manufacturerID}}</td>
+            <td>{{this.manufacturerName}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Drug</h2>
+<p>To add a new drug, please enter the information below and click 'Submit'!</p>
+<form id="add-drug-form-ajax">
+    <label for="input-drugID-ADD">Drug RXCUI: </label>
+    <input type="text" name="input-drugID-ADD" id="input-drugID-ADD" required>   
+    <label for="input-drugName-ADD">Drug Name: </label>
+    <input type="text" name="input-drugName-ADD" id="input-drugName-ADD" required>
+    <label for="input-manufacturerID-ADD">Manufacturer: </label>
+    <select name="input-manufacturerID-ADD" id="input-manufacturerID-ADD">
+        <option value="">Select a Manufacturer</option>
+        {{#each manufacturers}}
+        <option value="{{this.manufacturerID}}">{{this.name}}</option>
+        {{/each}}
+    </select>  
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_drug.js" type="application/javascript"></script>
